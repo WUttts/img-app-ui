@@ -21,9 +21,10 @@
   </div>
 </template>
 <script setup lang="ts">
+import { Auth } from "aws-amplify";
 import ThemeChange from "./components/ThemeChange.vue";
 
-const logout = () => {
-  console.log("logout");
+const logout = async () => {
+  await Auth.signOut();
 };
 </script>
