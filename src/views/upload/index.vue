@@ -3,7 +3,6 @@
     <span>Select a Image</span>
     <div>
       <n-upload
-        method="post"
         list-type="image-card"
         :max="1"
         :custom-request="processFile"
@@ -16,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { NUpload, NSpace, UploadCustomRequestOptions } from "naive-ui";
+import { NUpload, NSpace, UploadCustomRequestOptions, NButton } from "naive-ui";
 import type { UploadFileInfo } from "naive-ui";
 import { ref } from "vue";
 import request from "axios";
@@ -31,7 +30,7 @@ const upload = () => {
   const formData = new FormData();
   formData.append("file", choseFile.value as File);
   request.post("api/upload", formData).then((res) => {
-    alert(res);
+    alert(res.data?.message);
   });
 };
 

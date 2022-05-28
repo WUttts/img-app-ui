@@ -10,6 +10,7 @@
     "skipLibCheck": true,
     "jsx": "preserve",
     "sourceMap": true,
+    "types": ["node"],
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,

@@ -10,11 +10,12 @@ import "~/styles/tailwind.css";
 import "~/styles/main.scss";
 import "~/styles/nprogress.scss";
 
+import AmplifyVue from "@aws-amplify/ui-vue";
+
 const app = createApp(App);
 
 app.use(createPinia());
 registerStore();
-
+app.use(AmplifyVue);
 app.use(index);
-
 app.mount("#app");

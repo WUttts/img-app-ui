@@ -18,7 +18,7 @@
         </div>
         <div class="text-left">
           <p class="text-xs text-base-content text-opacity-50">Created by</p>
-          <h2 class="text-lg font-bold text-base-content">Kirk Lin</h2>
+          <h2 class="text-lg font-bold text-base-content">Your Taem Name</h2>
         </div>
       </a>
     </div>

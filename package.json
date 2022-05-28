@@ -15,11 +15,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^2.4.7",
     "@vueuse/core": "^8.3.1",
+    "aws-amplify": "^4.3.24",
     "axios": "^0.27.2",
     "daisyui": "^2.14.3",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.13",
+    "react-native": "^0.68.2",
     "sass": "^1.50.1",
     "theme-change": "^2.0.2",
     "vue": "^3.2.33",
