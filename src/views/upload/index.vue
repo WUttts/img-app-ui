@@ -10,7 +10,7 @@
       >
       </n-upload>
     </div>
-    <n-button type="primary" @click="upload" ghost> Upload </n-button>
+    <n-button type="primary" ghost @click="upload"> Upload </n-button>
   </n-space>
 </template>
 
@@ -29,7 +29,7 @@ const processFile = ({ file }: UploadCustomRequestOptions) => {
 const upload = () => {
   const formData = new FormData();
   formData.append("file", choseFile.value as File);
-  request.post("api/upload", formData).then((res) => {
+  request.post("api/image", formData).then((res) => {
     alert(res.data?.message);
   });
 };

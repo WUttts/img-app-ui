@@ -8,7 +8,7 @@
       </n-input-group>
     </div>
     <div><span>OR Search By Url</span></div>
-    <div class="w-100">
+    <div class="w-200">
       <n-input-group>
         <n-input
           v-model:value="imageUrlRef"
@@ -27,27 +27,27 @@
       >
       </n-upload>
     </div>
-    <n-button type="primary" @click="upload" ghost> Search </n-button>
-    <div class="w-40">
-      <span>Result:</span>
-      <n-card v-for="item in list" :key="item.url">
-        <template #cover>
+    <n-button type="primary" ghost @click="searchImage"> Search </n-button>
+    <div class="w-100">
+      <n-space vertical :size="10" align="center" class="mt-10">
+        <span>Result:</span>
+        <div v-for="item in list" :key="item.url" class="mt-4 w-80">
+          <p class="break-normal font-mono">tags: {{ item.tags }}</p>
+          <p class="break-normal font-mono">s3_url: {{ item.url }}</p>
           <img :src="item.url" />
-        </template>
-      </n-card>
+        </div>
+      </n-space>
     </div>
   </n-space>
 </template>
 
 <script setup lang="ts">
-import street from "~/assets/street.jpg";
 import {
   NUpload,
   NInputGroup,
   NInput,
   NButton,
   NSpace,
-  NCard,
   UploadCustomRequestOptions,
   UploadFileInfo,
 } from "naive-ui";
@@ -56,27 +56,29 @@ import request from "axios";
 
 interface Model {
   tags?: string[];
-  url?: string | null;
+  url?: string;
 }
 
 const choseFile = ref<File>();
 
 const imageTagRef = ref<string>("");
 const imageUrlRef = ref<string>("");
-const list = ref([{ url: street }]);
+const list = ref<Model[]>([]);
+
+console.log(list);
 
 const search = (type: number) => {
   const data: Model = {};
   if (type === 1) {
     data.tags = imageTagRef.value.split(",");
-    data.url = null;
+    data.url = "";
   }
   if (type === 2) {
     data.tags = [];
     data.url = imageUrlRef.value;
   }
   request.post("api/search", data).then((res) => {
-    console.log(res);
+    list.value = res.data.data;
   });
 };
 
@@ -84,11 +86,11 @@ const processFile = ({ file }: UploadCustomRequestOptions) => {
   choseFile.value = file.file as File;
 };
 
-const upload = () => {
+const searchImage = () => {
   const formData = new FormData();
   formData.append("file", choseFile.value as File);
-  request.post("api/upload", formData).then((res) => {
-    alert(res);
+  request.post("api/search/file", formData).then((res) => {
+    console.log(res);
   });
 };
 
